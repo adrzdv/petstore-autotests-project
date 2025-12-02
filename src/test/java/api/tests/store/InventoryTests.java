@@ -17,7 +17,7 @@ public class InventoryTests extends BaseSetup {
     @Test
     @DisplayName("GET /store/inventory: when authorized return status 200")
     void testInventoryReturnsStatusOkWithAuth() {
-        assertEquals(storeApi.getInventory().statusCode(), 200, "Status must be 200");
+        assertEquals(200, storeApi.getInventory().statusCode(), "Status must be 200");
     }
 
     @Disabled
@@ -60,7 +60,6 @@ public class InventoryTests extends BaseSetup {
         Map<String, Integer> map = storeApi.getInventory().jsonPath().getMap("");
 
         map.values().forEach(value -> assertFalse(value < 0, "Negative value: " + value));
-
     }
 
     @Test

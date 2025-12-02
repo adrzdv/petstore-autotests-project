@@ -1,5 +1,6 @@
 package api.client;
 
+import api.model.OrderDto;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -7,6 +8,7 @@ import static io.restassured.RestAssured.given;
 
 public class StoreApi {
     private static final String INVENTORY = "/store/inventory";
+    private static final String ORDER = "/store/order";
     private final String apiKey;
 
     public StoreApi(String apiKey) {
@@ -34,6 +36,24 @@ public class StoreApi {
                 .accept(ContentType.JSON)
                 .when()
                 .get(INVENTORY);
+    }
+
+    public Response createOrder(OrderDto order) {
+        return given()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .body(order)
+                .post(ORDER);
+    }
+
+    public Response getOrderById(long id) {
+        return given()
+                .get(ORDER + "/" + id);
+    }
+
+    public Response deleteOrderById(long id) {
+        return given()
+                .delete(ORDER + "/" + id);
     }
 
 
