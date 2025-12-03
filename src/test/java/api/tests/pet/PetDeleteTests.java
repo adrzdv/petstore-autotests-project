@@ -1,7 +1,5 @@
 package api.tests.pet;
 
-import api.base.BaseSetup;
-import api.client.PetApi;
 import api.model.ApiResponseDto;
 import api.model.CategoryDto;
 import api.model.PetDto;
@@ -15,8 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PetDeleteTests extends BaseSetup {
-    private final PetApi petApi = new PetApi(API_KEY);
+public class PetDeleteTests extends PetBaseTest {
 
     @Test
     @DisplayName("DELETE /pet/{petId}: delete an existing pet and get 200")

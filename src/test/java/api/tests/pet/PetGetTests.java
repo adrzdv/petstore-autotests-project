@@ -1,7 +1,5 @@
 package api.tests.pet;
 
-import api.base.BaseSetup;
-import api.client.PetApi;
 import api.model.ApiResponseDto;
 import api.model.CategoryDto;
 import api.model.PetDto;
@@ -13,10 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PetGetTests extends BaseSetup {
-    private final PetApi petApi = new PetApi(API_KEY);
+public class PetGetTests extends PetBaseTest {
 
     @Test
     @DisplayName("GET /pet/findByStatus: get list of pets filtering by status")
@@ -41,13 +37,15 @@ public class PetGetTests extends BaseSetup {
 
         assertAll(
                 "Validating response with Long overflow",
-                () -> assertEquals(404, maxValueResponse.statusCode(), "Expected code 404, got: " + maxValueResponse.statusCode()),
+                () -> assertEquals(404, maxValueResponse.statusCode(),
+                        "Expected code 404, got: " + maxValueResponse.statusCode()),
                 () -> assertTrue(maxResponse.message().contains("Pet not found"))
         );
 
         assertAll(
                 "Validating response with Long minimum value",
-                () -> assertEquals(404, minValueResponse.statusCode(), "Expected code 404, got: " + minValueResponse.statusCode()),
+                () -> assertEquals(404, minValueResponse.statusCode(),
+                        "Expected code 404, got: " + minValueResponse.statusCode()),
                 () -> assertTrue(minResponse.message().contains("Pet not found"))
         );
     }
@@ -77,7 +75,8 @@ public class PetGetTests extends BaseSetup {
 
         assertAll(
                 "Validating response on unknown pet",
-                () -> assertEquals(404, response.statusCode(), "Expected code 404, got: " + response.statusCode()),
+                () -> assertEquals(404, response.statusCode(),
+                        "Expected code 404, got: " + response.statusCode()),
                 () -> assertTrue(apiResponseDto.message().contains("Pet not found"))
         );
     }
